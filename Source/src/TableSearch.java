@@ -19,11 +19,6 @@ public class TableSearch {
     }
 
     public static Integer getIndex(ArrayList<String> list, String searchValue){
-        if(list.contains(searchValue) == true){
-            return list.indexOf(searchValue) + 1;
-        }
-        else{
-            return null;
-        }
+        return list.indexOf(searchValue) + 1;
     }
 }
