@@ -22,15 +22,18 @@ public class Order{
         Validate validate = new Validate(inventory, inventoryList, input, inputList);
         boolean isValid = validate.validateOrder();
         if(isValid == true){
-            Double totalPrice;
+            Double totalPrice = 0.0;
             String CSVOutput = "";
 
             Integer inventoryIndex;
             CSVOutput = "Item, Quantity, Price";
             for(Integer i=1; i<=input.size(); i++){
+                
                     inventoryIndex = TableSearch.getIndex(inventoryList, input.get(i)[0]);
+                    totalPrice = totalPrice + Double.parseDouble(input.get(i)[1]) * Double.parseDouble(inventory.get(inventoryIndex)[3]);
                     CSVOutput = CSVOutput + "\n" + inventory.get(inventoryIndex)[0] + "," + input.get(i)[1] + "," + inventory.get(inventoryIndex)[3];
             }
+            CSVOutput = CSVOutput + "\nTotal Price," + totalPrice.toString();
             System.out.println(CSVOutput);
 
             //CREATE AND WRITE TO A FILE
