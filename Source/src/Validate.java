@@ -20,12 +20,12 @@ public class Validate {
 
     public boolean validateOrder(){
 
-        //ttttttttttttttttttttttteeeeeeeeeeeeeesssssssssssssttttttttttttt
+        // //ttttttttttttttttttttttteeeeeeeeeeeeeesssssssssssssttttttttttttt
 
-        inventory = TableSearch.getTable(FilesConfig.InventoryFile);
-        input = TableSearch.getTable(FilesConfig.InputFile);
+        // inventory = TableSearch.getTable(FilesConfig.InventoryFile);
+        // input = TableSearch.getTable(FilesConfig.InputFile);
 
-        //tttttttttttttttttttteeeeeeeeeeeeesssssssssssssssstttttttttt
+        // //tttttttttttttttttttteeeeeeeeeeeeesssssssssssssssstttttttttt
 
         boolean validFlag = true;
         String validationAvailabilityMessage = "";
@@ -42,10 +42,20 @@ public class Validate {
             }
         }
 
+        
+
         for(Integer i=1; i<=input.size(); i++){
-            if(Integer.parseInt(input.get(i)[1]) <= Integer.parseInt(inventory.get(i)[2])){
-                System.out.println(input.get(i)[0]); 
+
+            if(inventoryList.contains(input.get(i)[0]) == true){
+                inventoryIndex = TableSearch.getIndex(inventoryList, input.get(i)[0]);
+            
+                if(Integer.parseInt(input.get(i)[1]) > Integer.parseInt(inventory.get(inventoryIndex)[2])){
+                validationQuantityMsg = validationQuantityMsg + "|" + "Quantity Issue:" + input.get(i)[0];
+                validFlag = false;
             }
+
+            }
+            // System.out.println(inventory.get(inventoryIndex)[2]);
         }
         
 
