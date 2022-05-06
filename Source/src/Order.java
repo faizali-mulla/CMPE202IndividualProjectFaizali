@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,6 +21,38 @@ public class Order{
     public void placeOrder(){
         Validate validate = new Validate(inventory, inventoryList, input, inputList);
         boolean isValid = validate.validateOrder();
-        System.out.println(isValid);
+        if(isValid == true){
+            Double totalPrice;
+            String CSVOutput = "";
+
+            Integer inventoryIndex;
+            CSVOutput = "Item, Quantity, Price";
+            for(Integer i=1; i<=input.size(); i++){
+                    inventoryIndex = TableSearch.getIndex(inventoryList, input.get(i)[0]);
+                    CSVOutput = CSVOutput + "\n" + inventory.get(inventoryIndex)[0] + "," + input.get(i)[1] + "," + inventory.get(inventoryIndex)[3];
+            }
+            System.out.println(CSVOutput);
+
+            //CREATE AND WRITE TO A FILE
+            File outputFile = new File(FilesConfig.OutputFile);
+            try{
+                outputFile.createNewFile();
+            }
+            catch(IOException e){
+                
+            }
+
+            try{
+                FileWriter fileWriter = new FileWriter(FilesConfig.OutputFile);
+                fileWriter.write(CSVOutput);
+                fileWriter.close();
+            }
+            catch(IOException e){
+                System.out.println("Some error occured while writing the output file.");
+            }
+        }
+        else{
+            System.out.println("Solve input issues first");
+        }
     }
 }
