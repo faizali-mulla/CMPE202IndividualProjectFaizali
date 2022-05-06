@@ -20,7 +20,6 @@ public class Order{
     }
     
     public void placeOrder(){
-        HashMap<Integer, String> cards = new HashMap<Integer, String>();
         ArrayList<String> cardsList = new ArrayList<String>();
         cardsList = TableSearch.getPrimaryArrayList(FilesConfig.CardsFile, 0);
         if(cardsList.contains(input.get(1)[2]) == false){
@@ -47,9 +46,7 @@ public class Order{
                     CSVOutput = CSVOutput + "\n" + inventory.get(inventoryIndex)[0] + "," + input.get(i)[1] + "," + inventory.get(inventoryIndex)[3];
             }
             CSVOutput = CSVOutput + "\nTotal Price," + totalPrice.toString();
-            System.out.println(CSVOutput);
 
-            //CREATE AND WRITE TO A FILE
             File outputFile = new File(FilesConfig.OutputFile);
             try{
                 outputFile.createNewFile();
