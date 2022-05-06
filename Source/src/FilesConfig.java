@@ -3,4 +3,5 @@ public class FilesConfig {
     static String InputFile = "Input.csv";
     static String OutputFile = "Output.csv";
     static String ValidationMessageFile = "Notification.txt";
+    static String CardsFile = "Cards.csv";
 }

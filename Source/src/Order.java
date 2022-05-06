@@ -1,3 +1,4 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +20,18 @@ public class Order{
     }
     
     public void placeOrder(){
+        HashMap<Integer, String> cards = new HashMap<Integer, String>();
+        ArrayList<String> cardsList = new ArrayList<String>();
+        cardsList = TableSearch.getPrimaryArrayList(FilesConfig.CardsFile, 0);
+        if(cardsList.contains(input.get(1)[2]) == false){
+            try{
+                FileWriter fileWriter = new FileWriter(FilesConfig.CardsFile, true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write("\n" + input.get(1)[2]);
+                bufferedWriter.close();
+            }
+            catch(IOException e){}
+        }
         Validate validate = new Validate(inventory, inventoryList, input, inputList);
         boolean isValid = validate.validateOrder();
         if(isValid == true){
