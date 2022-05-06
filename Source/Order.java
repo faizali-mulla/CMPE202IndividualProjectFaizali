@@ -26,7 +26,7 @@ public class Order{
             try{
                 FileWriter fileWriter = new FileWriter(FilesConfig.CardsFile, true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                bufferedWriter.write("\n" + input.get(1)[2]);
+                bufferedWriter.write(input.get(1)[2]);
                 bufferedWriter.close();
             }
             catch(IOException e){}
@@ -65,7 +65,8 @@ public class Order{
             }
         }
         else{
-            System.out.println("Solve input issues first");
+            File file = new File(FilesConfig.OutputFile);
+            file.delete();
         }
     }
 }
